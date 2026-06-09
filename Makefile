@@ -52,20 +52,20 @@ prod-down:
 
 # Create DB container
 dev-up:
-	@if docker compose -f docker/compose.yaml up --build 2>/dev/null; then \
+	@if docker compose -f docker/compose.yaml --env-file .env up --build 2>/dev/null; then \
 		: ; \
 	else \
 		echo "Falling back to Docker Compose V1"; \
-		docker-compose -f docker/compose.yaml up --build; \
+		docker-compose -f docker/compose.yaml --env-file .env up --build; \
 	fi
 
 # Shutdown DB container
 dev-down:
-	@if docker compose -f docker/compose.yaml down 2>/dev/null; then \
+	@if docker compose -f docker/compose.yaml --env-file .env down 2>/dev/null; then \
 		: ; \
 	else \
 		echo "Falling back to Docker Compose V1"; \
-		docker-compose -f docker/compose.yaml down; \
+		docker-compose -f docker/compose.yaml --env-file .env down; \
 	fi
 
 # Test the application
